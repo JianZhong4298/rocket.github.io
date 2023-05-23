@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页</title>
+    <link type="text/css" rel="stylesheet" href="./css/normalize.css">
+    <link type="text/css" rel="stylesheet" href="./css/login.css">
+    <script type="text/javascript" src="./js/public.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="container">
+             <!-- logo -->
+            <div class="logo">
+                <h1>
+                    <a href="#">
+                        <img src="./imgs/login_logo.png" alt="logo">
+                    </a>
+                </h1>
+            </div>
+
+            <div class="flexbox">
+                    <div class="bg-left">
+                    </div>
+                    <!-- pwd-wrap -->
+                    <div class="pwd-wrap">
+                        <div class="login-text">
+                            <h3>密码登录</h3>
+                        </div>
+                        <div class="user-input">
+                            <input class="input-user" type="text" placeholder="请输入用户名" />
+                        </div>
+                        <div class="pwd-input">
+                            <input class="input-password" type="password" placeholder="请输入密码" />
+                            <div class="icon-look"></div>
+                        </div>
+                        <a href="#" class="login-btn">登录</a>
+                    </div>
+            </div>
+           
+        </div>
+       
+    </div>
+
+    
+    <script type="text/javascript">
+        $(function(){
+
+          
+            stopBack(); //如果当前是登录状态，阻止返回登录页面
+
+            removeIndexData(); //如果sessionStorage有首页文章配置的缓存，就清除
+            removeBannerData(); //如果sessionStorage里有banner配置页的缓存，就清除
+            if(sessionStorage.getItem('userInfo')) {
+                sessionStorage.removeItem('userInfo');
+            }
+
+            //显示、隐藏密码
+            $('.icon-look').click(function(){
+                if($('.input-password').attr('type') === 'password') {
+                    $('.input-password').attr('type', 'text'); //如果密码框类型是 password，将其改为 text
+                } else {
+                    $('.input-password').attr('type', 'password'); //如果密码框类型是 password，将其改为 text
+                }
+            })
+
+
+            //登录
+            $('.login-btn').click(function(){
+
+                var username = $('.user-input .input-user').val(), //用户名
+                    password = $('.pwd-input .input-password').val(); //密码
+                
+                //拿到登录业务的promise
+               var loginPromise =  server.ajaxReturn({
+                    type: "POST",
+                    url: '/user/login',
+                    data: {
+                        username,
+                        password
+                    }
+                })
+
+                //对登录业务进行处理
+                loginPromise.then(function(res){ //请求成功
+                    if(res.code == 0) { //登录成功
+                        alert('登录成功');
+                        sessionStorage.setItem('userInfo', JSON.stringify(res.data)); //将用户信息存入 sessionStorage
+                        sessionStorage.setItem('loginStatus', 1); //登录状态1：表示登录成功
+                        location.href = 'admin.html'; //跳转到管理页面
+                    } else { //登录失败
+                        alert('登录失败');
+                    }
+                }).catch(function(err){ //请求失败
+                    console.log(err);
+                })
+                
+            });
+        });
+
+            
+    </script>
+</body>
+</html>

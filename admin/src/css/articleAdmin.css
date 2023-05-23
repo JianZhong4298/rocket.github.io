@@ -1,0 +1,400 @@
+.main .bd {
+    overflow: hidden;
+}
+
+.main .bd .filter-box {
+    height: 217px;
+    background: rgba(0,97,255,0.04);
+    box-sizing: border-box;
+    margin: 18px 0 0 18px;
+    overflow: hidden;
+}
+.main .bd .filter-box .row {
+    display: flex;
+    padding-left: 21px;
+}
+.main .bd .filter-box .input-wrap {
+    display: flex;
+}
+.main .bd .filter-box .row .date-box {
+    border: 1px solid #D9D9D9;
+    display: flex;
+}
+.main .bd .filter-box .row .date-text {
+    margin: 5px 10px 0 15px;
+}
+.main .bd .filter-box .row .date-start,
+.main .bd .filter-box .row .date-end {
+    /* width: 103px; */
+    height: 30px;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    /* font-size: 20px; */
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 30px;
+    -webkit-background-clip: text;
+}
+.main .bd .filter-box .row-title,
+.main .bd .filter-box .select-title {
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 23px;
+    -webkit-background-clip: text;
+}
+.main .bd .filter-box .input-wrap .row-input-title {
+    width: 257px;
+    height: 32px;
+    background-color: #fff;
+}
+.filter-box .input-wrap .row-input-title input {
+    width: 100%;
+    height: 100%;
+    border-radius: 2px 2px 2px 2px;
+    border: 1px solid #D9D9D9;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    line-height: 23px;
+    -webkit-background-clip: text;
+    padding: 5px 0 0 12px;
+    box-sizing: border-box;
+}
+
+.filter-box .select-box {
+    display: flex;
+}
+
+.filter-box .select-box select {
+    margin-top: -3px;
+    font-size: 15px;
+    padding-left: 4px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 23px;
+    -webkit-background-clip: text;
+    background: #FFFFFF;
+    border-radius: 2px 2px 2px 2px;
+    border: 1px solid #D9D9D9;
+}
+.filter-box .select-box #select-type {
+    width: 77px;
+    height: 32px;
+    /* margin-right: 60px; */
+}
+.filter-box .select-box #select-tag {
+    width: 121px;
+    height: 32px;
+}
+.filter-box .select-box #show-type {
+    width: 121px;
+    height: 32px;
+}
+
+
+.filter-box .reader-number-wrap {
+    display: flex;
+}
+.filter-box .reader-number-wrap .mid {
+    margin: 0 12px;
+    margin-top: 3px;
+}
+.filter-box .reader-number-wrap input {
+    width: 120px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 2px 2px 2px 2px;
+    border: 1px solid #D9D9D9;
+    padding-left: 6px;
+    box-sizing: border-box;
+}
+
+.filter-box  .btn-group {
+    width: 1236px;
+}
+.filter-box  .btn-group button {
+    width: 77px;
+    height: 33px;
+    border-radius: 2px 2px 2px 2px;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #0061FF;
+    line-height: 27px;
+    -webkit-background-clip: text;
+    cursor: pointer;
+}
+.filter-box  .btn-group .reset-btn {
+    margin-left: 509px;
+    margin-right: 28px;
+    border: 1px solid #0061FF;
+    color: #0061FF;
+}
+.filter-box  .btn-group .filter-btn {
+    background: #0061FF;
+    color: #FFFFFF;
+    border: 1px solid #0061FF;
+}
+.bd .btn-group button {
+    width: 77px;
+    height: 33px;
+    border-radius: 2px 2px 2px 2px;
+}
+.bd .btn-group .delete-btn {
+    border: 1px solid #0061FF;
+    margin-right: 21px;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #0061FF;
+    line-height: 27px;
+    -webkit-background-clip: text;
+    cursor: pointer;
+}
+.bd .btn-group .add-btn {
+    background: #0061FF;
+    border: 1px solid #0061ff;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 27px;
+    cursor: pointer;
+}
+.bd .desc-row {
+    display: flex;
+    height: 70px;
+    margin-top: 21px;
+    padding-left: 21px;
+    border-top: 1px solid #E9EBF2;
+    border-bottom: 1px solid #E9EBF2;
+}
+.bd .desc-row .sequence  {
+    display: flex;
+    margin-right: 40px;
+}
+.bd .desc-row .sequence input {
+    margin-top: 29px;
+}
+.bd .desc-row .sequence > p {
+    margin-left: 8px;
+}
+.bd .desc-row .common-title {
+    margin-top: 23px;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 27px;
+    -webkit-background-clip: text;
+}
+
+
+.bd .desc-row .article-form   {
+    margin-right: 27px;
+}
+.bd .desc-row .tag-text {
+    margin-right: 72px;
+}
+.bd .desc-row .show-style {
+    margin-right: 38px;
+}
+.bd .desc-row .article-title {
+    margin-right: 145px;
+}
+.bd .desc-row .real-number {
+    position: relative;
+    margin-right: 55px;
+}
+.bd .desc-row .triangle {
+    position: absolute;
+    top: 0px;
+    left: 100px;
+}
+.bd .desc-row .top-triangle {
+    position: absolute;
+    top: 2px;
+    left: -2px;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid #0061FF;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    cursor: pointer;
+}
+.bd .desc-row .bt-triangle {
+    position: absolute;
+    top: 18px;
+    left: -2px;
+    border-top: 6px solid #999999;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    cursor: pointer;
+}
+.bd .desc-row .after-number {
+    position: relative;
+    margin-right: 59px;
+}
+.bd .desc-row .after-number .top-triangle {
+    left: 14px;
+}
+.bd .desc-row .after-number .bt-triangle {
+    left: 14px;
+}
+.bd .desc-row .upload-time {
+    margin-right: 65px;
+}
+
+.bd .content-wrap {
+
+}
+.bd .content-wrap .common-text {
+    margin-top: 36px;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 23px;
+    -webkit-background-clip: text;
+}
+.bd .content-wrap .row {
+    display: flex;
+    height: 90px;
+    margin-left: 21px;
+    border-bottom: 1px solid #E9EBF2;
+}
+
+.bd .content-wrap .row .sequence {
+    display: flex;
+    min-width: 60px;
+    margin-right: 40px;
+}
+.bd .content-wrap .row .sequence .checkbox {
+    margin-top: 38px;
+}
+.bd .content-wrap .row .sequence .seq-id {
+    margin-left: 15px;
+}
+.bd .content-wrap .row .article-form {
+    margin-right: 69px;
+}
+.bd .content-wrap .row .tag-text {
+    margin-right: 77px;
+}
+.bd .content-wrap .row .show-style {
+    width: 64px;
+    margin-right: 44px;
+}
+.bd .content-wrap .row .article-title {
+    margin-top: 21px;
+    margin-right: 30px;
+    width: 187px;
+    height: 46px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: wrap;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-break: break-all;
+}
+.bd .content-wrap .row .real-number {
+    position: relative;
+    min-width: 60px;
+    margin-right: 80px;
+}
+
+.bd .content-wrap .row .after-number {
+    min-width: 60px;
+    margin-right: 100px;
+}
+.bd .content-wrap .row .upload-time {
+    margin-right: 54px;
+}
+
+.bd .content-wrap .row .del-btn,
+.bd .content-wrap .row .update-btn {
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #0061FF;
+    line-height: 23px;
+    -webkit-background-clip: text;
+}
+.bd .content-wrap .row .line {
+    display: inline-block;
+    width: 2px;
+    height: 13px;
+    background-color: #d9d9d9;
+    transform: translateY(1px);
+    margin: 0 6px;
+}
+
+
+.main .ft .page-wrap {
+    display: flex;
+    height: 120px;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+}
+.main .ft .to-wrap {
+    display: flex;
+}
+.ft .page-wrap .page-fn {
+    width: 72px;
+    height: 36px;
+    margin-right: 21px;
+    text-align: center;
+    line-height: 36px;
+    background: #FFFFFF;
+    border-radius: 2px 2px 2px 2px;
+    border: 1px solid #E9EBF2;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+}
+.ft .page-wrap .page {
+    display: block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border: 1px solid #E9EBF2;
+    margin-right: 21px;
+    text-align: center;
+    font-size: 15px;
+    font-family: Roboto-Regular, Roboto;
+    font-weight: 400;
+    color: #333333;
+}
+.ft .page-wrap .page.active {
+    border: 1px solid #0061FF;
+    background-color: #0061FF;
+    color: #fff;
+}
+.ft .to-wrap p:first-child {
+    margin-right: 12px;
+    margin-top: 6px;
+}
+.ft .to-wrap p:last-child {
+    margin-left: 12px;
+    margin-top: 6px;
+}
+.ft .to-wrap .page-to {
+    width: 53px;
+    height: 36px;
+}
+.ft .to-wrap .page-to input {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 2px 2px 2px 2px;
+    border: 1px solid #E9EBF2;
+    text-align: center;
+}

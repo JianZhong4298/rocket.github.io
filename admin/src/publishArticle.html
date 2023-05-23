@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理端_发表文章页面</title>
+    <link type="text/css" rel="stylesheet" href="./css/normalize.css">
+    <link type="text/css" rel="stylesheet" href="./css/common.css">
+    <link type="text/css" rel="stylesheet" href="./css/publishArticle.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script src="./js/public.js"></script>
+    <!-- 引入 css -->
+    <link href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css" rel="stylesheet">
+    <!-- 引入 js -->
+    <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        var E = window.wangEditor; // 全局变量
+    </script>
+
+    <style>
+      #editor—wrapper {
+        width: 737px;
+        border: 1px solid #ccc;
+        z-index: 100; /* 按需定义 */
+      }
+      #toolbar-container { border-bottom: 1px solid #ccc; }
+      #editor-container { height: 500px; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="container">
+            <!-- sidebar -->
+            <div class="sidebar">
+                <ul class="nav-list">
+                    <li class="list-item logo_list">
+                        <!-- logo -->
+                        <a href="#">
+                            <img src="./imgs/admin_logo.png" alt="admin_logo">
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="./admin.html">
+                            banner配置
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="./indexArticle.html">
+                            首页文章配置
+                        </a>
+                    <li class="list-item active">
+                        <a href="./publishArticle.html">
+                           发表文章
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="./articleAdmin.html">
+                           文章管理
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- main -->
+            <div class="main">
+                <div class="hd">
+                    <div class="login-status">
+                        <div class="login-avator">
+                            <img src="./imgs/icon_head_portrait.png" alt="">
+                        </div>
+                        <a class="login-text logout" href="javascript:;">退出登录</a>
+                    </div>
+                </div>
+                <!-- 表单 -->
+                <form >
+                    <div class="bd">
+                        <div class="row-wrap">
+                            <div class="row">
+                                <p class="row-title mt-3 mr-59" >标题</p>
+                                <div class="row-input-title">
+                                    <input class="input_title" type="text" maxlength="40" placeholder="请输入文章标题（建议字数在15个字内，不超过40个字）"/>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-51">
+                                <p class="row-title mr-29" >文章分类</p>
+                                <div class="select-box">
+                                    <label for="select-type">
+                                        <p class="select-title">类型</p>
+                                    </label>
+                                    <select id="select-type" name="article-type">
+                                        <option class="imageText" value="imageText">图文</option>
+                                        <option class="video" value="video">视频</option>
+                                    </select>
+                                </div>
+                                <div class="select-box">
+                                    <label for="select-tag">
+                                        <p class="select-title">标签</p>
+                                    </label>
+                                    <select id="select-tag" name="select-tag">
+                                        <option class="selection" value="selection">选品</option>
+                                        <option class="construction" value="construction">建站</option>
+                                        <option class="flow" value="flow">流量</option>
+                                        <option>物流</option>
+                                        <option>支付</option>
+                                    </select>
+                                </div>
+                                <div class="select-box">
+                                    <label for="show-type">
+                                        <p class="select-title">表现形式</p>
+                                    </label>
+                                    <select id="show-type" name="show-type">
+                                        <option class="training" value="training">训练营</option>
+                                        <option class="class" value="class">公开课</option>
+                                        <option class="broadcast" value="broadcast">直播活动</option>
+                                        <option class="" value="">无</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="row mt-51">
+                                <p class="row-title mt-3 mr-44" >阅读量</p>
+                                <div class="row-input-title">
+                                    <input class="read_add" type="text"  placeholder="请输入修改后的阅读量"/>
+                                </div>
+                            </div>
+    
+                            <div class="row mt-47">
+                                <p class="row-title mr-59" >摘要</p>
+                                <div class="row-textarea">
+                                    <textarea class="summary" name="summary" placeholder="请输入文章摘要"></textarea>
+                                </div>
+                            </div>
+    
+    
+                            <div class="row mt-42">
+                                <p class="row-title mr-59" >正文</p>
+                                <div class="row-textarea">
+                                    <div id="editor—wrapper">
+                                        <div id="toolbar-container"><!-- 工具栏 --></div>
+                                        <div id="editor-container"><!-- 编辑器 --></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-42">
+                                <p class="row-title mr-59" >封面</p>
+                                <div class="img-box image-wrap">
+                                    <div class="img_before"></div>
+                                    <div class="img upload_img">
+                                    </div>
+                                    <div class="img_after">点击上传</div>
+                                    <input type="file" class="file-upload" accept="image/*" name="picture">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <p>(建议 尺寸比例3:2，尺寸大小不低于333*222px)</p>
+                            </div>
+                        </div>                   
+                     </div>
+                    <div class="ft">
+                        <div class="btn-group">
+                            <button type="reset" class="reset-btn">重置</button>
+                            <button type="button" class="save-btn">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+            $(function(){
+                backToLoginPage(); //如果当前不是登录状态，回到登录界面
+                logout(); //退出登录
+                listenSelectBox('#select-type'); //文章类型下拉框
+                listenSelectBox('#select-tag'); //标签下拉框
+                listenSelectBox('#show-type'); //表现形式下拉框
+
+                removeIndexData(); //如果sessionStorage有首页文章配置的缓存，就清除
+                removeBannerData(); //如果sessionStorage里有banner配置页的缓存，就清除
+
+                var articleId = Number(location.search.split('=')[1]); //从地址栏中获取artilceId
+                var cover = '';  //封面url
+                // var insertImageUrl = ''; //正文的插入图片的url
+
+                /**这个axios实例可以用于上传图片或者其他文件，通过调用它的post方
+                法并传入文件数据和请求参数即可发送请求。在请求过程中会自动携带上面设置的请求头信息。**/
+                const uploadHttp = axios.create({ //创建axios实例
+                    headers: { //请求头信息
+                        "X-Token": getUserInfo().token
+                    },
+                    baseURL: getBaseUrl(), //请求的基础URL
+                    timeout: 5000 //请求的超时时间
+                })
+
+                //富文本正文
+                const { createEditor, createToolbar } = window.wangEditor
+                //配置编辑器对象
+                const editorConfig = {
+                    placeholder: '请输入正文（富文本（含视频））', //编辑器的占位符
+                    showLinkImg: false,
+                    MENU_CONF: {
+                        // 上传图片功能
+                        uploadImage: {
+                            async customUpload(file, insertFn) {
+                                //开始请求  
+                                let formData = new FormData();          
+                                formData.append("file", file);          
+                                const res = await uploadHttp.post('/file/uploadImage',formData);          
+                                const code = res.data.code;
+                                if(code == 0) {
+                                    alert('上传图片成功');
+                                    const url = res.data.data.url; //拿到图片的url地址
+                                    console.log(url);
+                                    insertFn(url);  // 将图片 URL 插入到编辑器中
+                                } else {
+                                    alert('上传图片失败');
+                                }
+                            }
+                        },
+                        insertImage: {
+                            onInsertedImage(imageNode, insertFn) {
+                                if(imageNode == null) return;
+                                const {src, alt, url, href} = imageNode;
+                                console.log('inserted image', src, alt, url, href);
+                            }
+                        },
+                        // 上传视频
+                        uploadVideo: {
+                            async customUpload(file, insertFn) {
+                                //file选中的文件
+                                let formData = new FormData();          
+                                formData.append("file", file);          
+                                const res = await uploadHttp.post('/file/uploadFile',formData);          
+                                const code = res.data.code;
+                                if(code == 0) {
+                                    alert('上传视频成功');
+                                    const url = res.data.data.url; //拿到图片的url地址
+                                    console.log(url);
+                                    insertFn(url);  // 将图片 URL 插入到编辑器中
+                                } else {
+                                    alert('上传视频失败');
+                                }
+                            }
+                        }
+                    }, 
+                    onChange(editor) { //监听编辑器
+                        const html = editor.getHtml()
+                        console.log(html);
+                        // 也可以同步到 <textarea>
+                    }
+                }
+                //创建编辑器
+                const editor = createEditor({
+                    selector: '#editor-container', //编辑器容器的选择器
+                    html: '', //编辑器的初始内容
+                    config: editorConfig, //编辑器的配置
+                    mode: 'default', // 编辑器的模式 or 'simple' 
+                })
+                const toolbarConfig = {}
+                //创建工具栏
+                const toolbar = createToolbar({
+                    editor,
+                    selector: '#toolbar-container', //工具栏容器的选择器
+                    config: toolbarConfig, //工具栏的配置
+                    mode: 'default', //工具栏的模式 or 'simple'
+                })
+                window.editor = editor;
+                
+
+                //重置
+                $('.reset-btn').click(function(){
+                        $('.summary').html(''); //清空 摘要文本域
+                        
+                        editor.setHtml(''); //清空 正文
+
+                        if(articleId) {
+                            //封面还原
+                            renderCover(articleId);
+                        } 
+                });
+
+                 //保存
+                 $('.save-btn').click(function(e) {
+                            var id = articleId || 0,
+                                title = $('.input_title').val(),
+                                type = getValueFromSelect('#select-type') || 'imageText', 
+                                label = getValueFromSelect('#select-tag') || 'selection',
+                                expression = getValueFromSelect('#show-type') || 'training',
+                                read_add = Number($('.read_add').val()) || 0,
+                                description = $('.summary').val(),
+                                content = editor.getHtml();
+
+                            var article = {
+                                id,
+                                title,
+                                type,
+                                label,
+                                expression,
+                                read_add,
+                                description,
+                                content,
+                                cover
+                            };
+
+                            console.log(article);
+
+
+                            var savePromise = server.ajaxReturn({
+                                type: "post",
+                                url:  "/article/save",
+                                headers: {
+                                    "X-Token": getUserInfo().token   
+                                },
+                                data: {
+                                    article
+                                }
+                            });
+
+                            savePromise.then(function(res){
+                                if(res.code == 500) {
+                                    alert(res.message);
+                                    return;
+                                }
+                                alert('保存成功');
+                                console.log(res);
+                            }).catch(function(err){
+                                console.log(err);
+                            })
+                            
+                    });
+                 
+                
+                //上传图片
+                uploadImageToServer({
+                    container: '.image-wrap',
+                    dom: '.file-upload',
+                    img: '#preview',
+                    success: function(res) {
+                        cover = res;
+                        console.log(res);
+                        $('.img_before').css('opacity', '0');
+                        $('.img_after').css('opacity', '0');
+                        $('.upload_img').html('<img src="'+ res +'"/>');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+
+
+
+
+
+
+                //修改文章
+                if(articleId) {
+                    var updateArticlePromise = server.ajaxReturn({
+                        type: "get",
+                        url:  "/article/detail",
+                        headers: {
+                            "X-Token": getUserInfo().token   
+                        },
+                        data: {
+                            articleId: articleId
+                        }
+                    });
+
+                    updateArticlePromise.then(function(res){
+                        
+                        //渲染封面
+                        var renderCover = function(articleId, article={}) {
+                            $('.upload_img').html('<img style="filter: brightness(.6) grayscale(50%);" src="'+ article.cover +'" />');
+                            if(res.data.article.cover) {
+                                $('.img_after').css('color', '#fff');
+                                $('.img_before ').css('backgroundImage', 'url(./imgs/icon_add_1.png)');
+                            }
+                        }
+
+
+
+
+                        //渲染文章
+                        var renderArticle = function() {
+                            if(!res.data) return;
+                            
+                            var article = res.data.article;
+                            console.log(article.cover);
+                           
+                            $('.input_title').val(article.title); //标题
+                            $('.' + article.type).attr('selected', 'selected'); //类型
+                            $('.' + article.label).attr('selected', 'selected');//标签
+
+                            //表现形式
+                            article.expression !== '' 
+                                ? $('.' + article.expression).attr('selected', 'selected')
+                                : $('#show-type').find('option').last().attr('selected', 'selected');
+
+                            $('.read_add').val(article.read_add); //阅读量
+                            $('.summary').html(article.description);//摘要
+                            // $('#editor-container').html(article.content);//正文 
+                            editor.setHtml(article.content);
+                            
+                            renderCover(articleId, article); //渲染封面
+                        }
+                        renderArticle();
+                    }).catch(function(err){
+                        console.log(err);
+                    });
+                }
+               
+               
+
+        });
+      
+    </script>
+</body>
+</html>

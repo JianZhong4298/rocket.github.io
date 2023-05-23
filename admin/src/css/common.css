@@ -1,0 +1,150 @@
+body {
+    background-color: #F9FAFC;
+}
+textarea {
+    resize: none;
+}
+.wrap .container {
+    position: relative;
+}
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 165px;
+    height: 100%;
+    background-color: #fff;
+}
+.sidebar  .nav-list .list-item {
+    cursor: pointer;
+}
+.sidebar .nav-list .list-item.active {
+    background-color: #0061FF;
+}
+.sidebar .nav-list .list-item {
+    width: 165px;
+    height: 75px;
+    border-radius: 0px 0px 0px 0px;
+    opacity: 1;
+}
+.sidebar .nav-list .list-item a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.sidebar .nav-list .list-item:first-child img {
+    width: 100%;
+}
+.sidebar .nav-list .list-item {
+    width: 165px;
+    height: 75px;
+    border-radius: 0px 0px 0px 0px;
+    opacity: 1;
+}
+.sidebar .nav-list .list-item:not(.logo_list) {
+    line-height: 75px;
+    text-align: center;
+}
+.sidebar .nav-list .list-item:not(.logo_list) a {
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 27px;
+    -webkit-background-clip: text;
+}
+.sidebar .nav-list .list-item.active a {
+    color: #fff;
+}
+.main {
+    width: 100%;
+    height: 100%;
+    min-width: 1440px;
+    padding-left: 165px;
+    box-sizing: border-box;
+}
+.main .hd {
+    height: 75px;
+    background-color: #fff;
+}
+.main .hd .login-status {
+    display: flex;
+    justify-content: flex-end;
+}
+.main .hd .login-avator {
+    width: 36px;
+    height: 36px;
+    margin: 20px 10px 0 0;
+}
+.main .hd .login-avator img {
+    width: 100%;
+}
+.main .hd .login-text {
+    display: block;
+    margin: 26px 60px 0 0;
+    width: 72px;
+    height: 27px;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 27px;
+    -webkit-background-clip: text;
+}
+.main .bd {
+    min-height: 789px;
+    background: #FFFFFF;
+    border-radius: 0px 0px 0px 0px;
+    margin: 18px 0 0 18px;
+}
+
+
+
+/* 外边距 */
+.mt-3 {
+    margin-top: 3px;
+}
+.mt-51 {
+    margin-top: 51px;
+}
+.mt-42 {
+    margin-top: 42px;
+}
+.mt-47 {
+    margin-top: 47px;
+}
+.mr-59 {
+    margin-right: 59px;
+}
+.mr-29 {
+    margin-right: 29px;
+}
+.mr-44 {
+    margin-right: 44px;
+}
+.mt-42 {
+    margin-top: 42px;
+}
+.mt-35 {
+    margin-top: 35px;
+}
+.mt-30 {
+    margin-top: 30px;
+}
+.mr-15 {
+    margin-right: 15px;
+}
+.mr-53 {
+    margin-right: 53px;
+}
+.mr-45 {
+    margin-right: 45px;
+}
+.mr-42 {
+    margin-right: 42px;
+}
+.ml-21 {
+    margin-left: 21px;
+}

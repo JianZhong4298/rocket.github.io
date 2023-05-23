@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  /* width: 1440px;
+  margin: 0 auto; */
+}
+img {
+  width: 100%;
+}
+ul,li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}

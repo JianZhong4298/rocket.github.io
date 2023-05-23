@@ -1,0 +1,189 @@
+.upload_img img {
+    height: 100%;
+}
+#preview {
+    height: 100%;
+}
+.main .bd {
+    border-bottom: 1px solid #E9EBF2;
+    padding-bottom: 42px;
+}
+.main .bd .row-wrap {
+    padding: 24px 0 0 30px;
+    /* border: 1px solid red; */
+}
+.main .bd .row-wrap .row {
+    display: flex;
+    /* border: 1px solid green; */
+}
+
+.main .bd .row-wrap .row-title {
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    line-height: 23px;
+    color: #333333;
+    -webkit-background-clip: text;
+}
+.main .bd .row-wrap .row-input-title {
+    width: 736px;
+    height: 32px;
+}
+.main .bd .row-wrap .row-input-title input {
+    width: 100%;
+    height: 100%;
+    padding: 4px 0 0 12px;
+    box-sizing: border-box;
+    border-radius: 2px 2px 2px 2px;
+    border: 1px solid #D9D9D9;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    line-height: 23px;
+    -webkit-background-clip: text;
+}
+.main .bd .row-wrap .select-box {
+    display: flex;
+}
+.main .bd .row-wrap .select-box .select-title {
+    font-size: 15px;
+    margin-right: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 23px;
+    -webkit-background-clip: text;
+}
+.main .bd .row-wrap .select-box select {
+    margin-top: -3px;
+    font-size: 15px;
+    padding-left: 4px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 23px;
+    -webkit-background-clip: text;
+    background: #FFFFFF;
+    border-radius: 2px 2px 2px 2px;
+    border: 1px solid #D9D9D9;
+}
+.main .bd .row-wrap .select-box #select-type,
+.main .bd .row-wrap .select-box #select-tag {
+    width: 77px;
+    height: 32px;
+    margin-right: 60px;
+}
+.main .bd .row-wrap .select-box #show-type {
+    width: 121px;
+    height: 32px;
+}
+.main .bd .row-wrap textarea {
+    border-radius: 3px 3px 3px 3px;
+    border: 1px solid #D9D9D9;
+    padding: 11px 0 0 12px;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    line-height: 23px;
+    resize: none;
+    -webkit-background-clip: text;
+}
+.main .bd .row-wrap textarea.summary {
+    width: 737px;
+    height: 134px;
+}
+.main .bd .row-wrap textarea.content {
+    width: 736px;
+    height: 275px;
+}
+
+.main  .bd .row-wrap .file-upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 127px;
+    height: 85px;
+    cursor: pointer;
+    z-index: 300; 
+}
+.main  .bd .row-wrap  .img-box  {
+    position: relative;
+    width: 127px;
+    height: 85px;
+    background: #F9FAFC;
+    border-radius: 2px 2px 2px 2px;
+    border: 1px solid #D9D9D9;
+    cursor: pointer;
+}
+.main  .bd .row-wrap  .img-box .upload_img {
+    height: 85px;
+}
+.main  .bd .row-wrap  .img-box .img_before {
+    position: absolute;
+    top: 21px;
+    left: 54px;
+    background-image: url(../imgs/icon_add_2.png);
+    background-repeat: no-repeat; 
+    width: 20px;
+    height: 20px;
+    background-size: contain; 
+    z-index: 20;
+}
+.main .bd .row-wrap  .img-box .img_after {
+    position: absolute;
+    bottom: 15px;
+    left: 37px;
+    width: 60px;
+    height: 23px;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    line-height: 23px;
+    -webkit-background-clip: text;
+}
+.main .bd .row-wrap .row:last-child {
+    margin-top: 9px;
+    margin-left: 89px;
+    font-size: 12px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #F61818;
+    line-height: 18px;
+    -webkit-background-clip: text;
+}
+
+.ft {
+    width: 1258px;
+    height: 75px;
+    background: #FFFFFF;
+    margin-left: 18px;
+}
+.ft .btn-group {
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ft .btn-group button {
+    width: 60px;
+    height: 30px;
+    border-radius: 2px 2px 2px 2px;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    line-height: 27px;
+    -webkit-background-clip: text;
+    cursor: pointer;
+}
+.ft .btn-group .reset-btn {
+    margin-right: 31px;
+    border: 1px solid #0061FF;
+    color: #0061FF;
+}
+.ft .btn-group .save-btn {
+    background: #0061FF;
+    color: #FFFFFF;
+    border: 1px solid #0061FF;
+}

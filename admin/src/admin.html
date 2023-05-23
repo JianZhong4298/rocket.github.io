@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理端页面</title>
+    <link type="text/css" rel="stylesheet" href="./css/normalize.css">
+    <link type="text/css" rel="stylesheet" href="./css/common.css">
+    <link type="text/css" rel="stylesheet" href="./css/admin.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script src="./js/public.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="container">
+            <!-- sidebar -->
+            <div class="sidebar">
+                <ul class="nav-list">
+                    <li class="list-item logo_list">
+                        <!-- logo -->
+                        <a href="#">
+                            <img src="./imgs/admin_logo.png" alt="admin_logo">
+                        </a>
+                    </li>
+                    <li class="list-item active">
+                        <a href="./admin.html">
+                            banner配置
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="./indexArticle.html">
+                            首页文章配置
+                        </a>
+                    <li class="list-item">
+                        <a href="./publishArticle.html">
+                           发表文章
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="./articleAdmin.html">
+                           文章管理
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- main -->
+            <div class="main">
+                <div class="hd">
+                    <div class="login-status">
+                        <div class="login-avator">
+                            <img src="./imgs/icon_head_portrait.png" alt="">
+                        </div>
+                        <a class="login-text logout" href="javascript:;">退出登录</a>
+                    </div>
+                </div>
+                <div class="bd">
+                    <div class="tab">
+                        <ul class="tab-list">
+                            <li class="active" data-topic="rotation">
+                                <a href="#">首页轮播图</a>
+                            </li>
+                            <li data-topic="activity">
+                                <a href="#">首页运营活动图</a>
+                            </li>
+                            <li data-topic="hot">
+                                <a href="#">本期风云人物</a>
+                            </li>
+                            <li data-topic="pioneering">
+                                <a href="#">马上创业</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <a href="javascript:;" class="delete-btn">删除</a>
+                        <a href="javascript:;" class="add-btn">新增</a>
+                    </div>
+
+                    <div class="desc-row">
+                        <div class="sequence">
+                            <input class="select-all" type="checkbox" />
+                            <span>序号</span>
+                        </div>
+                        <div class="pc-text">
+                            <p>网页端图片</p>
+                            <span class="size">(尺寸1920*770px)</span>
+                        </div>
+                        <div class="mobile-text">
+                            <p>移动端图片</p>
+                            <span class="size">(尺寸750*562px)</span>
+                        </div>
+                        <div class="lk">
+                            链接
+                        </div>
+                        <div class="remark">备注</div>
+                        <div class="move">移动</div>
+                        <div class="edit">编辑</div>
+                    </div>
+
+                    <div class="content-wrap">
+                        <ul class="content-list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        
+        $(function(){
+
+
+            var topic = 'rotation', //当前页面是哪一个topic
+                searchArr = location.search.slice(1).split('&'), //地址栏参数列表
+                bannerId = Number(searchArr[0].split('=')[1]) || 0,
+                checkedCount = 0,
+                mapRow = new Map(), //取消行之前的html
+                isAdd = false, //点击新增按钮，isAdd变为true；否则，isAdd为false
+                delList = [], //要删除的文章列表
+                cacheAjax = null; //缓存, key为topic值，value为后台返回的数据
+            
+
+
+            console.log(bannerId);
+            if(location.search) {
+                topic = searchArr[1].split('=')[1];
+            }
+
+            cacheAjax = JSON.parse(sessionStorage.getItem(topic)); //缓存
+
+
+             //渲染当前选中的是哪一个topic
+             var renderActive = function() {
+                switch(topic) {
+                    case 'rotation': //首页轮播图 
+                         $('.tab li').removeClass('active');
+                         $('.tab li[data-topic="rotation"]').addClass('active');
+                        break;
+                    case 'activity': //首页运营活动图
+                        $('.tab li').removeClass('active');
+                        $('.tab li[data-topic="activity"]').addClass('active');
+                        break;
+                    case 'hot': //本期风云人物
+                        $('.tab li').removeClass('active');
+                        $('.tab li[data-topic="hot"]').addClass('active');
+                        break;
+                    case 'pioneering': 
+                        $('.tab li').removeClass('active');
+                        $('.tab li[data-topic="pioneering"]').addClass('active');
+                        break;
+                    default: 
+                        break;
+                }
+            }
+
+
+            // 渲染banner列表
+            var renderBanner = function(opt = {topic: 'rotation' }, callback) {
+                
+                cacheAjax = JSON.parse(sessionStorage.getItem(opt.topic)); //缓存, key为topic，值为后台返回的数据，只请求1次，避免相同的数据重复请求
+                
+                //展示列表
+                 var showList = function(res) {
+                        var listStr = '',
+                            rows = res.data.rows,
+                            item,
+                            len = rows.length;
+
+                        // mark
+                        if(typeof(callback) === 'function') {
+                            rows = callback(rows);
+                        }
+                        for(var i = 0; i < len; ++i) {
+                            item = rows[i];
+                            var number = i < 10 ? ('0' + i) : i;
+                            listStr += '<li class="list-item" data-id="'+ item.id +'">\
+                                            <div class="sequence">\
+                                                <input class="checkbox" type="checkbox" />\
+                                                <span>'+ number +'</span>\
+                                            </div>\
+                                            <div class="pc-img">\
+                                                <img src="'+ item.img_web +'" alt="">\
+                                            </div>\
+                                            <div class="mobile-img">\
+                                            <img src="'+ item.img_h5 +'" alt="">\
+                                            </div>\
+                                            <div class="lk">\
+                                                <span>'+ item.link +'</span>\
+                                            </div>\
+                                            <div class="remark">'+ item.mark +'</div>\
+                                            <div class="move">\
+                                                <span class="up-btn">上移</span>\
+                                                <span class="line"></span>\
+                                                <span class="down-btn">下移</span>\
+                                            </div>\
+                                            <div class="edit">\
+                                                <a href="javascript:;"  class="del-btn" data-id="'+ item.id +'">删除</a>\
+                                                <span class="line"></span>\
+                                                <a class="update-btn" data-topic="'+ item.topic +'" data-id="'+ item.id +'" href="javascript:;">修改</a>\
+                                            </div>\
+                                        </li>';
+                            }
+                            $('.content-wrap .content-list').html(listStr);
+                        }
+                
+                if(cacheAjax) { //如果缓存有，就通过缓存获取，否则，向服务器获取
+                    showList(cacheAjax);
+                } else {
+
+                    var getBannerListPromise = server.ajaxReturn({
+                        type: "get",
+                        url:  "/banner/list",
+                        headers: {
+                            "X-Token": getUserInfo().token   
+                        },
+                        data: opt
+                    });
+
+                    getBannerListPromise.then(function(res){
+                            sessionStorage.setItem(opt.topic, JSON.stringify(res)); //缓存
+                            cacheAjax = JSON.parse(sessionStorage.getItem(topic));
+                            topic = opt.topic; //更新topic值
+                            showList(res);
+                    }).catch(function(err){
+                        console.log(err);
+                    })
+                }
+            }
+            
+            //单条数据修改操作
+            var renderChangeRow = function() {  
+
+                if(cacheAjax) {
+                    var rows = cacheAjax.data.rows;
+                    
+                    var targetResult = rows.filter(function(elem, idx) {
+                        return elem.id === bannerId;
+                    })
+                }
+                
+                if(targetResult && targetResult.length) {
+                    var img_web = targetResult[0].img_web,
+                        img_h5 = targetResult[0].img_h5,
+                        link = targetResult[0].link,
+                        mark = targetResult[0].mark;
+                    $('.set-pc-img').attr('src', img_web);
+                    $('.set-mobile-img').attr('src', img_h5);
+                    $('.get_link').val(link);
+                    $('.get_remark').val(mark);
+                }
+            }   
+                
+            var bindEvent = function() {
+
+                // 修改
+                $('.content-wrap').on('click', '.update-btn', function(){
+                    var $li = $(this).parent().parent(); //获取当前行
+                    var rowLk = $li.find('.lk').text().trim(); //原链接
+                    var rowRemark = $li.find('.remark').text().trim(); //原备注
+                    mapRow.set($li.attr('data-id'), $li.html()); //key为data-id，值为原本的html，用作取消时还原操作
+                    
+                    $li.addClass('active'); //为正在修改的行添加类名active
+
+                     $li.html(' <div class="sequence">\
+                                    <input type="checkbox" />\
+                                    <span>'+ $(this).attr('data-id') +'</span>\
+                                </div>\
+                                <div class="pc-img">\
+                                    <div class="img_before"></div>\
+                                    <img class="set-pc-img" style="filter: brightness(.4) grayscale(50%);" src="'+ ($li.find('.pc-img img').attr('src')) +'" alt="">\
+                                    <input type="file" class="file-update" accept="image/*" name="picture">\
+                                    <div class="img_after">修改图片</div>\
+                                </div>\
+                                <div class="mobile-img">\
+                                    <div class="img_before"></div>\
+                                    <img class="set-mobile-img" style="filter: brightness(.4) grayscale(50%);" src="'+ ($li.find('.mobile-img img').attr('src')) +'"  style="position:absolute;top:0;left:0;width:103px;" " />\
+                                    <input type="file" class="file-upload" accept="image/*" name="picture">\
+                                    <div class="img_after">上传图片</div>\
+                                </div>\
+                                <div class="lk">\
+                                    <textarea class="get_link" placeholder="请输入链接">'+ rowLk +'</textarea>\
+                                </div>\
+                                <div class="remark">\
+                                    <textarea class="get_remark" placeholder="请输入备注">' + rowRemark + '</textarea>\
+                                </div>\
+                                <div class="btn-group">\
+                                    <button class="cancel-btn">取消</button>\
+                                    <button class="save-btn">保存</button>\
+                                </div>');
+                })
+
+
+
+                 //tab栏切换
+                 $('.tab .tab-list').on('click', 'li', function(){
+                     //已选中
+                      if($(this).hasClass('active')) {
+                         return;
+                      }
+                      //切换
+                      $('.tab .tab-list > li').removeClass('active');
+                      $(this).addClass('active');  
+                      isAdd = false; 
+
+                      //更新checkbox状态
+                      checkedCount = 0;
+                      if($('.select-all').prop('checked')) {
+                        $('.select-all').prop('checked', false);
+                      }
+                      
+                      //更新delList
+                      delList = [];
+
+                     
+                      topic = $(this).attr('data-topic');
+                      var opt = {
+                         topic: $(this).attr('data-topic')
+                      };
+
+                      renderBanner(opt);
+                 });
+
+                 // 上传pc图片
+                uploadImageToServer({
+                    container: '.content-wrap',
+                    dom: '.file-update',
+                    img: '.set-pc-img',
+                    success: function(res, $li) {
+                        var $pcImg = $li.find('.pc-img');
+                        $pcImg.find('.img_before').eq(0).css('opacity', '0');
+                        $pcImg.find('.img_after').eq(0).css('opacity', '0');
+
+                        $pcImg.find('.set-pc-img').eq(0).attr('style', '')
+                                                        .attr('src', res);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+
+                
+                //上传移动端图片
+                uploadImageToServer({
+                    container: '.content-wrap',
+                    dom: '.file-upload',
+                    img: '.set-mobile-img',
+                    success: function(res, $li, idx) {
+                        var $mobileImg = $li.find('.mobile-img');
+
+                        $mobileImg.find('.img_before').eq(0).css('opacity', '0');
+                        $mobileImg.find('.img_after').eq(0).css('opacity', '0');
+                        $mobileImg.find('.set-mobile-img').eq(0).css('filter', '')
+                                                          .attr('src', res);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+                
+               
+                //保存
+                $('.content-wrap').on('click','.save-btn' ,function() {
+                    // 获取当前设定的的值
+                    $li = $(this).parent().parent();
+                    bannerId = $li.attr('data-id');
+                    //获取当前设定的的值
+                    var id = bannerId,
+                        img_web = $('.set-pc-img').attr('src'),
+                        img_h5 = $('.set-mobile-img').attr('src'),
+                        link = $('.get_link').val(),
+                        mark = $('.get_remark').val();
+                    
+                    var banner = {
+                        id,
+                        topic,
+                        img_web,
+                        img_h5,
+                        link,
+                        mark    
+                    };
+
+
+                    var saveDataPromise = server.ajaxReturn({
+                        type: "post",
+                        url:  "/banner/save",
+                        headers: {
+                            "X-Token": getUserInfo().token   
+                        },
+                        data: {
+                            banner
+                        }
+                    });
+
+                    saveDataPromise.then(function(res){
+                        console.log(topic);
+                            sessionStorage.removeItem(topic);
+                            alert('保存成功');
+                            renderBanner({
+                                topic: topic
+                            });
+                            if(!$li.hasClass('active')) {
+                                isAdd = false;
+                            }
+                    }).catch(function(err){
+                        console.log(err);
+                    });
+
+                })
+                
+
+                //取消
+                $('.content-wrap').on('click','.cancel-btn', function(){
+                    $li = $(this).parent().parent();
+                    var index = $li.index();
+                    if($li.hasClass('active')) {
+                        if(confirm('确定要取消吗')) {
+                            $li.removeClass('active');
+                            $li.html(mapRow.get($li.attr('data-id')));
+                        } 
+                    } else {
+                        if(confirm('确定要取消吗')) {
+                            isAdd = false;
+                            $('.content-wrap .list-item.set').remove();
+                        } 
+                    }
+                });
+
+                //单独删除操作  
+                $('.content-wrap').on('click', '.del-btn',function(){
+                            var bannerId = Number($(this).attr('data-id'));
+                            console.log(bannerId);
+                            if(confirm('确定要删除吗')) {
+
+                                var deleteRowDataPromise = server.ajaxReturn({
+                                    type: "post",
+                                    url:  "/banner/delete",
+                                    headers: {
+                                        "X-Token": getUserInfo().token   
+                                    },
+                                    data: {
+                                        bannerId
+                                    }
+                                });
+
+                                deleteRowDataPromise.then(function(res){
+                                    sessionStorage.removeItem(topic);
+                                    alert('删除成功');
+                                    renderBanner({
+                                        topic: topic    
+                                    });            
+                                    isAdd = false;
+                                }).catch(function(err){
+                                    console.log(err);
+                                })  
+                            }
+                    });
+                
+                //上移
+                $('.content-wrap').on('click', '.up-btn', function(){
+                    var bannerId = Number($(this).closest('.list-item').attr('data-id'));
+
+                    var moveUpPromise = server.ajaxReturn({
+                        type: "post",
+                        url:  "/banner/move",
+                        headers: {
+                            "X-Token": getUserInfo().token  
+                        },
+                        data: {
+                            bannerId,
+                            move: 'up'
+                        }
+                    });
+
+                    moveUpPromise.then(function(res){
+                        console.log(res);
+                        if(res.data.other == null) {
+                            alert('已经位于顶部');
+                            return;
+                        }
+                        alert('上移成功');
+                        sessionStorage.removeItem(topic);
+                        renderBanner({
+                            topic: topic
+                        });  
+                    }).catch(function(err){
+                        console.log(err);
+                    })
+                });
+
+                //下移
+                $('.content-wrap').on('click', '.down-btn', function(){
+                    var bannerId = Number($(this).closest('.list-item').attr('data-id'));
+
+                    var moveDownPromise = server.ajaxReturn({
+                        type: "post",
+                        url:  "/banner/move",
+                        headers: {
+                            "X-Token": getUserInfo().token  
+                        },
+                        data: {
+                            bannerId,
+                            move: 'down'
+                        }
+                    });
+
+                    moveDownPromise.then(function(res){
+                        console.log(res);
+                        if(res.data.other == null) {
+                            alert('已经位于底部');
+                            return;
+                        }
+                        alert('下移成功');
+                        sessionStorage.removeItem(topic);
+                        renderBanner({
+                            topic: topic
+                        });  
+                    }).catch(function(err){
+                        console.log(err);
+                    });
+                });
+
+                //监听checkbox
+                $('.content-wrap').on('click', '.checkbox', function(){
+                    if($(this).prop('checked')) {
+                        checkedCount++;
+                        delList.push(Number($(this).closest('.list-item').attr('data-id')));
+                    } else {
+                        checkedCount--;
+                        delList.pop();
+                    }
+
+                    if(checkedCount === $('.checkbox').length) {
+                        $('.select-all').prop('checked', true);
+                    } else {
+                        $('.select-all').prop('checked', false);
+                    }
+
+                    console.log(delList);
+                });
+
+                //全选
+                $('.select-all').click(function(){
+                   if($(this).prop('checked')) {
+                      $('.checkbox').prop('checked', true);  
+                      checkedCount =  $('.checkbox').length;
+
+                      delList = [];
+                      $('.content-list .list-item:not(.set)').each(function(idx, elem){
+                        delList.push(Number($(this).attr('data-id')));
+                      });
+
+                   } else {
+                      $('.checkbox').prop('checked', false);  
+                      checkedCount = 0;
+                      delList = [];
+                   }
+
+                   console.log(delList);
+
+                });
+            
+                //批量删除操作
+               $('.btn-group').on('click', '.delete-btn', function() {       
+                    var len = delList.length;
+                    if(!len) {
+                        alert('请选择要删除的序列');
+                        return;
+                    }
+                    if(confirm('确定要删除吗')) {
+                        delList.forEach(function(elem, idx){
+                            var removePromise = server.ajaxReturn({
+                                type: "post",
+                                url:  "/banner/delete",
+                                headers: {
+                                    "X-Token": getUserInfo().token   
+                                },
+                                data: {
+                                    bannerId: elem
+                                }
+                            });
+                            removePromise.then(function(res){
+                                if(idx === len-1) {
+                                    console.log(idx, len-1);
+                                    sessionStorage.removeItem(topic);
+                                    alert('删除成功');
+                                    renderBanner({
+                                        topic: topic
+                                    });  
+                                }
+                            }).catch(function(err){
+                                console.log(err);
+                            });
+                        })
+                    }
+               })
+            
+            
+               //新增
+               $('.btn-group').on('click', '.add-btn', function(){
+                    isAdd = !isAdd;
+                    if(isAdd) {
+                        $('.content-wrap .content-list').append('<li class="list-item set add">\
+                                                                    <div class="sequence">\
+                                                                        <input type="checkbox" />\
+                                                                        <span>02</span>\
+                                                                    </div>\
+                                                                    <div class="pc-img">\
+                                                                        <div class="img_before"></div>\
+                                                                        <img class="set-pc-img" style="filter: brightness(.4) grayscale(50%);" src="http://rocket.dev.yes-z.com/upload/image/2d/2d1a744e46640b41c27f8403ae8e8db2.png" alt="">\
+                                                                        <input type="file" class="file-update" accept="image/*" name="picture">\
+                                                                        <div class="img_after">修改图片</div>\
+                                                                    </div>\
+                                                                    <div class="mobile-img">\
+                                                                        <div class="img_before"></div>\
+                                                                        <img class="set-mobile-img" style="filter: brightness(.4) grayscale(50%);" src="http://rocket.dev.yes-z.com/upload/image/98/983e6bf841cd542b3e8d6a32234453da.png"  style="position:absolute;top:0;left:0;width:103px;" " />\
+                                                                        <input type="file" class="file-upload" accept="image/*" name="picture">\
+                                                                        <div class="img_after">上传图片</div>\
+                                                                    </div>\
+                                                                    <div class="lk">\
+                                                                        <textarea class="get_link" placeholder="请输入链接"></textarea>\
+                                                                    </div>\
+                                                                    <div class="remark">\
+                                                                        <textarea class="get_remark" placeholder="请输入备注"></textarea>\
+                                                                    </div>\
+                                                                    <div class="btn-group">\
+                                                                        <button class="cancel-btn">取消</button>\
+                                                                        <button class="save-btn">保存</button>\
+                                                                    </div>\
+                                                                </li>');
+                    } else {
+                        $('.content-wrap .list-item.set').remove();
+                    }
+               });
+            }
+
+            console.log(isAuth());
+
+
+            var init = function() {
+                backToLoginPage(); //如果当前不是登录状态，就返回到登录页面
+                removeIndexData(); //如果sessionStorage有首页文章配置的缓存，就清除
+                logout(); //退出登录
+                renderActive(); //当前选中的栏目
+                renderBanner({topic: topic}); //渲染banner列表
+                bindEvent(); //事件管理
+                renderChangeRow(); //单条数据修改操作
+            }
+
+            init();
+        });
+            
+    </script>
+</body>
+</html>

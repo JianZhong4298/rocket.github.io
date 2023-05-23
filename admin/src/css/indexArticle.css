@@ -1,0 +1,469 @@
+.main .bd .tab-list {
+    display: flex;
+    height: 72px;
+    line-height: 72px;
+    border-bottom: 1px solid #E9EBF2;
+}
+.main .bd .tab-list > li:first-child {
+    margin-left: 30px;
+}
+.main .bd .tab-list > li {
+    margin-right: 62px;
+}
+.main .bd .tab-list > li:nth-child(2) {
+    margin-right: 71px;
+}
+.main .bd .tab-list > li.active {
+    position: relative
+}
+.main .bd .tab-list > li.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 6px;
+    background: #0061FF;
+    transition: all .3s ease;
+    border-radius: 23px 23px 23px 23px;
+}
+.main .bd .tab-list > li a {
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 27px;
+    -webkit-background-clip: text;
+}
+
+.main .bd .btn-group {
+    height: 90px;
+    line-height: 90px;
+    padding-left: 30px;
+    border-bottom: 1px solid #E9EBF2;
+}
+.main .bd .btn-group a {
+    display: inline-block;
+    text-align: center;
+    width: 77px;
+    height: 33px;
+    line-height: 33px;
+    border-radius: 2px 2px 2px 2px;
+}
+.main .bd .btn-group .delete-btn {
+    border: 1px solid #0061FF;
+    margin-right: 21px;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #0061FF;
+    -webkit-background-clip: text;
+}
+.main .bd .btn-group .add-btn {
+    background: #0061FF;
+    box-sizing: border-box;
+    border: 1px solid #0061ff;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+
+.main .bd .desc-row {
+    display: flex;
+    height: 88px;
+    border-bottom: 1px solid #E9EBF2;
+}
+.main .bd .desc-row > div {
+    margin-top: 21px;
+}
+.main .bd .desc-row .sequence {
+    padding: 0 26px 0 30px;
+}
+.main .bd .desc-row .sequence input[type="checkbox"] {
+    margin-right: 15px;
+}
+.main .bd .desc-row .sequence span {
+    font-size: 18px;
+}
+.main .bd .desc-row .pc-text {
+    padding-right: 41px;
+}
+.main .bd .desc-row .pc-text p {
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 27px;
+    -webkit-background-clip: text;
+}
+.main .bd .desc-row .pc-text .size {
+    font-size: 12px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #F61818;
+    line-height: 18px;
+    -webkit-background-clip: text;
+}
+.main .bd .desc-row .mobile-text {
+    padding-right: 31px;
+}
+.main .bd .desc-row .mobile-text p {
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 27px;
+    -webkit-background-clip: text;
+}
+.main .bd .desc-row .mobile-text .size {
+    font-size: 12px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #F61818;
+    line-height: 18px;
+    -webkit-background-clip: text;
+}
+/* mark */
+.main .bd .desc-row .lk {
+    padding-right: 259px;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 27px;
+    -webkit-background-clip: text;
+}
+
+.main .bd .desc-row .remark {
+    padding-right: 275px;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 27px;
+    -webkit-background-clip: text;
+}
+.main .bd .desc-row .move {
+    padding-right: 90px;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 27px;
+    -webkit-background-clip: text;
+} 
+
+
+.main .bd .content-wrap .list-item {
+    display: flex;
+    min-height: 124px;
+    margin-left: 30px;
+    border-bottom: 1px solid #E9EBF2;
+}
+.main .content-wrap .list-item .sequence {
+    margin-top: 51px;
+    padding-right: 44px;
+}
+.main .content-wrap .list-item .sequence input[type="checkbox"] {
+    margin-right: 15px;
+}
+.main .content-wrap .list-item .sequence span {
+    display: inline-block;
+    min-width: 25px;
+}
+.main .content-wrap .list-item .pc-img {
+    width: 78px;
+    height: 82px;
+    margin-top: 22px;
+    padding-right: 58px;
+}
+.main .content-wrap .list-item .pc-img img {
+    width: 100%;
+    height: 100%;
+}
+.main .content-wrap .list-item .mobile-img {
+    width: 103px;
+    height: 53px;
+    margin-top: 36px;
+    padding-right: 28px;
+}
+.main .content-wrap .list-item .mobile-img img {
+    width: 100%;
+    height: 100%;
+}
+.main .content-wrap .list-item .lk {
+    padding-right: 33px;
+    margin-top: 50px;
+    height: 113px;
+    width: 262px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+/* 修改状态 start*/
+.main .content-wrap .list-item.active .lk {
+    margin: 0;
+    padding: 0;
+    width: 280px;
+    height: 124px;
+    opacity: 1;
+}
+.main .bd .lk .get_link {
+    width: 100%;
+    height: 100%;
+    padding: 6px 9px;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    border: 1px solid #D9D9D9;
+    line-height: 23px;
+    -webkit-background-clip: text;
+}
+.main .content-wrap .list-item.active .remark {
+    padding-left: 10px;
+    margin-top: 0;
+    padding-right: 0;
+    width: 280px;
+    height: 124px;
+}
+.main .content-wrap .list-item.active .get_remark {
+        width: 100%;
+        height: 100%;
+        padding: 6px 9px;
+        margin: 0;
+        box-sizing: border-box;
+        text-align: left;
+        font-size: 15px;
+        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+        font-weight: 400;
+        border: 1px solid #D9D9D9;
+        line-height: 23px;
+        -webkit-background-clip: text;
+}
+
+/* 修改状态 end*/
+
+.main .content-wrap .list-item .lk span {
+    font-size: 14px;
+    font-family: Roboto-Regular, Roboto;
+    font-weight: 400;
+    color: #000000;
+    -webkit-background-clip: text;
+}
+.main .content-wrap .list-item .remark {    
+    width: 258px;
+    height: 113px;
+    margin-top: 41px;
+    padding-right: 50px;
+    font-size: 14px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    line-height: 23px;
+    -webkit-background-clip: text;
+}
+.main .content-wrap .list-item .move {
+    margin-top: 51px;
+    padding-right: 44px;
+}
+.main .content-wrap .list-item .up-btn,
+.main .content-wrap .list-item .down-btn,
+.main .content-wrap .list-item .del-btn,
+.main .content-wrap .list-item .update-btn {
+    width: 30px;
+    height: 23px;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #0061FF;
+    line-height: 23px;
+    -webkit-background-clip: text;
+    cursor: pointer;
+}
+.main .content-wrap .list-item .up-btn,
+.main .content-wrap .list-item .del-btn {
+    padding-right: 9px;
+}
+.main .content-wrap .list-item .line {
+    display: inline-block;
+    width: 2px;
+    height: 13px;
+    background-color: #d9d9d9;
+    margin-right: 9px;
+    transform: translateY(1px);
+}
+.main .content-wrap .list-item .del-btn {
+    width: 30px;
+    height: 23px;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #0061FF;
+    line-height: 23px;
+    -webkit-background-clip: text;
+}
+.main .content-wrap .list-item .edit {
+    margin-top: 51px;
+}
+.main .content-wrap .list-item.set .pc-img,
+.main .content-wrap .list-item.active .pc-img {
+    position: relative;
+    width: 78px;
+    height: 82px;
+}
+
+.main .content-wrap .list-item.set .pc-img .img_before,
+.main .content-wrap .list-item.active .pc-img .img_before {
+    position: absolute;
+    top: 29px;
+    left: 33px;
+    width: 12px;
+    height: 12px;
+    background: url(../imgs/icon_add_1.png) no-repeat;
+    background-size: contain;
+    z-index: 20;
+}
+.main .content-wrap .list-item.set .pc-img .img_after,
+.main .content-wrap .list-item.active .pc-img .img_after {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #fff;
+    height: 21px;
+    font-size: 10px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #FFFFFF;
+    -webkit-background-clip: text;
+}
+.main .content-wrap .list-item.set .pc-img,
+.main .content-wrap .list-item.set .mobile-img,
+.main .content-wrap .list-item.active .pc-img,
+.main .content-wrap .list-item.active .mobile-img {
+    position: relative;
+    cursor: pointer;
+}
+
+
+.main .content-wrap .list-item.set .file-update,
+.main .content-wrap .list-item.active .file-update{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 77px;
+    height: 100%;
+    border: 1px solid red;
+    z-index: 300;
+}
+.main .content-wrap .list-item.set .file-upload,
+.main .content-wrap .list-item.active .file-upload  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100px;
+    height: 100%;
+    z-index: 300;
+}
+
+.main .content-wrap .list-item.set .mobile-img .img,
+.main .content-wrap .list-item.active .mobile-img .img {
+    position: absolute;
+    width: 103px;
+    height: 53px;
+    background: #F9FAFC;
+    border-radius: 2px 2px 2px 2px;
+    opacity: 1;
+    border: 1px dotted #D9D9D9;
+}
+.main .content-wrap .list-item.set .mobile-img .img_before,
+.main .content-wrap .list-item.active .mobile-img .img_before {
+    position: absolute;
+    top: 12px;
+    left: 45px;
+    background: url(../imgs/icon_add_1.png) no-repeat;  
+    width: 12px;
+    height: 12px;
+    background-size: contain; 
+    z-index: 20;
+}
+.main .content-wrap .list-item.set .mobile-img .img_after,
+.main .content-wrap .list-item.active .mobile-img .img_after {
+    position: absolute;
+    bottom: 8px;
+    left: 26px;
+    font-size: 11px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    line-height: 21px;
+    color: #fff;
+    -webkit-background-clip: text;
+}
+.main .content-wrap .list-item.set .lk,
+.main .content-wrap .list-item.set .remark {
+    margin: 0;
+    padding: 0;
+    width: 280px;
+    height: 124px;
+    opacity: 1;
+}
+.main .content-wrap .list-item.set .remark {
+    padding-left: 10px;
+}
+.main .content-wrap .list-item.set .get_link,
+.main .content-wrap .list-item.active .get_link,
+.main .content-wrap .list-item.set .get_remark,
+.main .content-wrap .list-item.active .get_remark {
+    width: 100%;
+    height: 100%;
+    padding: 6px 9px;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 15px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    border: 1px solid #D9D9D9;
+    line-height: 23px;
+    -webkit-background-clip: text;
+    resize: none;
+}
+.main .content-wrap .list-item.set .btn-group,
+.main .content-wrap .list-item.active .btn-group {
+    padding-left: 0;
+    margin-left: 41px;
+}
+.main .content-wrap .list-item.set .cancel-btn,
+.main .content-wrap .list-item.set .save-btn,
+.main .content-wrap .list-item.active .cancel-btn,
+.main .content-wrap .list-item.active .save-btn {
+    width: 60px;
+    height: 30px;
+    margin-top: 58px;
+    border-radius: 2px 2px 2px 2px;
+    border: 1px solid #0061FF;
+    opacity: 1;
+    font-size: 18px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    line-height: 27px;
+    cursor: pointer;
+}
+.main .content-wrap .list-item.set .cancel-btn,
+.main .content-wrap .list-item.active .cancel-btn {
+    margin-right: 30px;
+    color: #0061FF;
+}
+.main .content-wrap .list-item.set .save-btn,
+.main .content-wrap .list-item.active .save-btn {
+    background: #0061FF;
+    color: #FFFFFF;
+}

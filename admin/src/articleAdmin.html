@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理端_文章管理页面</title>
+    <link type="text/css" rel="stylesheet" href="./css/normalize.css">
+    <link type="text/css" rel="stylesheet" href="./css/common.css">
+    <link type="text/css" rel="stylesheet" href="./css/articleAdmin.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script src="./js/public.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="container">
+            <!-- sidebar -->
+            <div class="sidebar">
+                <ul class="nav-list">
+                    <li class="list-item logo_list">
+                        <!-- logo -->
+                        <a href="#">
+                            <img src="./imgs/admin_logo.png" alt="admin_logo">
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="./admin.html">
+                            banner配置
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="./indexArticle.html">
+                            首页文章配置
+                        </a>
+                    <li class="list-item">
+                        <a href="./publishArticle.html">
+                           发表文章
+                        </a>
+                    </li>
+                    <li class="list-item active">
+                        <a href="./articleAdmin.html">
+                           文章管理
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- main -->
+            <div class="main">
+                <div class="hd">
+                    <div class="login-status">
+                        <div class="login-avator">
+                            <img src="./imgs/icon_head_portrait.png" alt="">
+                        </div>
+                        <a class="login-text logout" href="javascript:;">退出登录</a>
+                    </div>
+                </div>
+                <div class="bd">
+                    <form >
+                        <div class="filter-box">
+                            <div class="row mt-35">
+                                <div class="input-wrap mr-42">
+                                    <p class="row-title mr-15 mt-3">文章标题</p>
+                                    <div class="row-input-title">
+                                        <input type="text" placeholder="请输入文章标题"/>
+                                    </div>
+                                </div>
+                                <div class="select-box mr-53">
+                                    <label for="select-type" class="mt-3 mr-15">
+                                        <p class="select-title">文章类型</p>
+                                    </label>
+                                    <select id="select-type" name="article-type">
+                                        <option selected class="imageText" value="图文">图文</option>
+                                        <option class="video" value="视频">视频</option>
+                                    </select>
+                                </div>
+                                <div class="select-box mr-45">
+                                    <label for="select-tag" class="mt-3 mr-15">
+                                        <p class="select-title">标签</p>
+                                    </label>
+                                    <select id="select-tag" name="select-tag">
+                                        <option selected class="selection" value="选品">选品</option>
+                                        <option class="construction" value="建站">建站</option>
+                                        <option class="flow" value="流量">流量</option>
+                                        <option class="logistics" value="logistics">物流</option>
+                                        <option class="pay" value="pay">支付</option>
+                                    </select>
+                                </div>
+                                <div class="select-box">
+                                    <label for="show-type" class="mt-3 mr-15">
+                                        <p class="select-title">表现形式</p>
+                                    </label>
+                                    <select id="show-type" name="show-type">
+                                        <option selected class="training" value="训练营">训练营</option>
+                                        <option class="class" value="公开课">公开课</option>
+                                        <option class="broadcast" value="直播活动">直播活动</option>
+                                        <option class="" value="无">无</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-35">
+                                <div class="input-wrap mr-42">
+                                    <p class="row-title mr-15 mt-3">发表时间</p>
+                                    <div class="row-input-title date-box">
+                                        <input type="date"  value="2022-01-01" class="date-start" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
+                                        <span class="date-text">至</span>
+                                        <input type="date"  value="2022-01-01" class="date-end" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
+                                    </div>
+                                </div>
+                                
+                                <div class="reader-number-wrap mr-45">
+                                     <p class="row-title mr-15 mt-3">真实阅读量</p>
+                                    
+                                     <input type="text" class="from"/>
+                                     <p class="mid">至</p>
+                                    <input type="text" class="to"/>
+                                </div>
+    
+                                <div class="reader-number-wrap">
+                                    <p class="row-title mr-15 mt-3">修改后阅读量</p>
+                                    <input type="text" class="from"/>
+                                    <p class="mid">至</p>
+                                   <input type="text" class="to"/>
+                               </div>
+                            </div>
+    
+                            <div class="row mt-30">
+                                <div class="btn-group">
+                                    <button type="reset" class="reset-btn">重置</button>
+                                    <button type="button" class="filter-btn">筛选</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+
+                    <div class="btn-group mt-42 ml-21">
+                        <button class="delete-btn">删除</button>
+                        <button class="add-btn">新增</button>
+                    </div>
+
+                    <div class="desc-row">
+                        <div class="sequence">
+                            <div class="checkbox">
+                                <input type="checkbox" class="select-all"/>
+                            </div>
+                            <p class="common-title">序号</p>
+                        </div>
+                        <div class="article-form common-title">
+                            文章类型
+                        </div>
+                        <div class="tag-text common-title">
+                           标签
+                        </div>
+                        <div class="show-style common-title">
+                           表现形式
+                        </div>
+                        <div class="article-title common-title">文章标题</div>
+                        <div class="real-number common-title">
+                            <span>真实阅读量</span>
+                            <div class="triangle">
+                                <div class="top-triangle"></div>
+                                <div class="bt-triangle"></div>
+                             </div>
+                        </div>
+                        <div class="after-number common-title">
+                            <span>修改后阅读量</span>
+                            <div class="triangle">
+                                <div class="top-triangle"></div>
+                                <div class="bt-triangle"></div>
+                             </div>
+                        </div>
+                        <div class="upload-time common-title">发布时间</div>
+                        <div class="edit-title common-title">编辑</div>
+                    </div>
+
+                    <div class="content-wrap">
+                       
+                   
+                    </div>
+
+                </div>
+                <div class="ft">
+                    <div class="page-wrap">
+                        <a href="javascript:;" class="page-fn last-page">上一页</a>
+                        <a href="javascript:;" class="page active">1</a>
+                        <a href="javascript:;" class="page">2</a>
+                        <a href="javascript:;" class="page">3</a>
+                        <a href="javascript:;" class="page">4</a>
+                        <a href="javascript:;" class="page-fn next-page">下一页</a>
+                        <div class="to-wrap">
+                            <p>前往</p>
+                            <div class="page-to">
+                                <input class="page_to_num" type="text" />
+                            </div>
+                            <p>页</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        $(function(){
+            
+            var currentPage = 1;
+            var articleIdArr = [];
+            var tickedCount = 0; //当前已勾选个数
+            var size = 10;
+
+            //渲染文章
+            var renderArticle = function(opt = {}, callback) {
+
+                //拿到文章列表数据的promise
+                var getArticleListPromise = server.ajaxReturn({
+                    type: "get",
+                    url:  "/article/list",
+                    headers: {
+                        "X-Token": getUserInfo().token   
+                    },
+                    data: opt
+                });
+
+                getArticleListPromise.then(function(res){
+                    //标签
+                    var labelObj = {
+                        selection: '选品',
+                        construction: '建站',
+                        flow: '流量',
+                        logistics: '物流',
+                        pay: '支付'
+                    }; 
+                    //表现形式
+                    var expressionObj = {
+                        training: '训练营',
+                        class: '公开课',
+                        broadcast: '直播活动',
+                        '': '无'
+                    }; 
+
+                    var listStr = '',
+                        rows = res.data.rows,
+                        item,
+                        len = rows.length;
+
+                    for(var i = 0; i < len; ++i) {
+                            item = rows[i];
+                            listStr += '<div class="row" dataId="'+ item.id +'">\
+                                <div class="sequence">\
+                                    <div class="checkbox">\
+                                        <input type="checkbox" />\
+                                    </div>\
+                                    <p class="seq-id common-text">'+ item.id +'</p>\
+                                </div>\
+                                <div class="article-form common-text">'+ (item.type === 'imageText' ? '图文' : '视频') +'</div>\
+                                <div class="tag-text common-text">'+ labelObj[item.label] +'</div>\
+                                <div class="show-style common-text">'+ expressionObj[item.expression] +'</div>\
+                                <div class="article-title common-text">'+ item.title +'</div>\
+                                <div class="real-number common-text">'+ item.read +'</div>\
+                                <div class="after-number common-text">'+ item.read_add +'</div>\
+                                <div class="upload-time common-text">'+ (item.update_time.slice(0,10)) +'</div>\
+                                <div class="edit-title common-text">\
+                                    <a href="javascript:;" class="del-btn">删除</a>\
+                                    <span class="line"></span>\
+                                    <a href="./publishArticle.html?articleId='+item.id+'" class="update-btn">修改</a>\
+                                </div>\
+                            </div>';
+                    }
+                    $('.content-wrap').html(listStr);
+                    
+                }).catch(function(err){
+                    console.log(err);
+                });
+            }
+            
+            
+            //筛选
+            var filterForm = function() {
+
+                listenSelectBox('#select-type'); //文章类型下拉框
+                listenSelectBox('#select-tag'); //标签下拉框
+                listenSelectBox('#show-type'); //表现形式下拉框
+
+                $('.filter-btn').click(function(){
+                    var title = $('.row-input-title input[type="text"]').val(), //文章标题
+                        type = getValueFromSelect('#select-type'), //文章类型
+                        label = getValueFromSelect('#select-tag'), //标志
+                        expression = getValueFromSelect('#show-type'), //表现形式
+                        dateStart = $('.date-start').val(), //发表时间起始值
+                        dateEnd = $('.date-end').val(), //发表时间终点值
+                        readStart = Number($('.reader-number-wrap .from').eq(0).val()), //真实阅读量起始值
+                        readEnd = Number($('.reader-number-wrap .from').eq(0).val()),//真实阅读量终点值
+                        readAddStart = Number($('.reader-number-wrap .from').eq(1).val()), //修改后阅读量起始值
+                        readAddEnd = Number($('.reader-number-wrap .to').eq(1).val()) //修改后阅读量终点值
+                    
+
+                    var data = { 
+                        title,
+                        type,
+                        label,
+                        expression,
+                        'create_time': `${Date.parse(dateStart)},${Date.parse(dateEnd)}`,
+                        readStart,
+                        readEnd,
+                        readAddStart,
+                        readAddEnd,
+                        page: currentPage,
+                        size: 10
+                    };
+                    console.log(data);
+
+                    console.log(currentPage);
+                    renderArticle(data);
+
+                }) 
+            }
+
+
+            //分页
+            var pagination = function() {
+                var size = 10, //每页展示的数据条数
+                    maxPageNum = 4; 
+
+                $('.page-wrap').click(function(e){
+                    var e = e || e.srcElement,
+                        tar = e.target || e.srcElement,
+                        className= tar.className,
+                        curPage = 1;
+                
+                    tickedCount = 0; //清0
+
+                    //上一页
+                    if($(tar).hasClass('last-page')) {
+                        var index = -1;
+                        tickedCount = 0; //清0
+                        if($('.select-all').prop('checked', true)) {
+                            $('.select-all').prop('checked', false);
+                        }
+                        $('.page').each(function(idx, elem){
+                            if($(elem).hasClass('active')) {
+                                index = idx;
+                            }
+                        });
+                        if(index > 0) {
+                            index--;
+                            $('.page').removeClass('active');
+                            $('.page').eq(index).addClass('active');
+                            curPage = Number($('.page').eq(index).text());
+                            currentPage = curPage;
+                            console.log(curPage);
+                            //调接口
+                        renderArticle({
+                                page: curPage,
+                                size
+                        });
+
+                        } else {
+                            alert('已经是第一页');
+                            return;
+                        }
+                    }
+
+                //下一页
+                if($(tar).hasClass('next-page')) {
+                    var index = -1;
+                    tickedCount = 0; //清0
+                    if($('.select-all').prop('checked', true)) {
+                        $('.select-all').prop('checked', false);
+                    }
+                    $('.page').each(function(idx, elem){
+                        if($(elem).hasClass('active')) {
+                            index = idx;
+                        }
+                    });
+                    if(index < maxPageNum-1) {
+                        index++;
+                        $('.page').removeClass('active');
+                        $('.page').eq(index).addClass('active');
+                        curPage =  Number($('.page').eq(index).text());
+                        currentPage = curPage;
+                        //调接口
+                        renderArticle({
+                            page: curPage,
+                            size
+                        });
+                    } else {
+                        alert('已经是最后一页');
+                        return;
+                    }
+                }
+
+                //数字页码
+                if($(tar).hasClass('page') && !$(tar).hasClass('active')) {
+                    tickedCount = 0; //清0
+                    if($('.select-all').prop('checked', true)) {
+                        $('.select-all').prop('checked', false);
+                    }
+                    $('.page').removeClass('active');
+                    $(tar).addClass('active');
+                    curPage = Number($(tar).text());
+                    currentPage = curPage;
+                    console.log(curPage);
+
+                    renderArticle({
+                        page: curPage,
+                        size
+                    });
+                }
+                
+            })
+           
+
+            //跳到某一页
+            $('.page_to_num').on('input',function(e){
+                var num = Number($(this).val());
+                
+                tickedCount = 0; //清0
+
+                //边界
+                if(num > maxPageNum || num < 0) {
+                    alert('没有该页数');
+                    return;
+                }
+
+                $('.page').removeClass('active');
+                $('.page').eq(num-1).addClass('active');
+
+                renderArticle({
+                    page: num,
+                    size
+                });
+            })
+           
+            }
+           
+
+
+            //事件管理
+            var bindEvent = function() {
+                //新增
+                $('.add-btn').click(function(){
+                    location.href = './publishArticle.html?articleId=0';
+                });
+
+                //删除数据
+                $('.content-wrap').on('click', '.del-btn',function(){
+                    console.log(currentPage);
+                    var articleId = Number($(this).parent().parent().find('.seq-id')[0].textContent);
+                    if(confirm('确定要删除吗')) {
+                        var deleteRowDataPromise = server.ajaxReturn({
+                            type: "post",
+                            url: "/article/delete",
+                            headers: {
+                                "X-Token": getUserInfo().token
+                            },
+                            data: {
+                                page: currentPage,
+                                size,
+                                articleId: [articleId]
+                            }
+                        });
+
+                        deleteRowDataPromise.then(function(res){
+                            //删除单条数据的业务逻辑
+                            renderArticle()
+                        }).catch(function(err){
+                            console.log(err);
+                        })
+                    }
+                });
+
+                //点击checkbox
+                $('.content-wrap').on('click', 'input[type="checkbox"]',function(){
+                    if($(this).prop('checked')) {
+                        articleIdArr.push(Number($(this).closest('.row').eq(0).attr('dataId')));
+                        tickedCount++;
+                    } else {
+                        articleIdArr.pop();
+                        tickedCount--;
+                    }
+
+                    if(tickedCount === $('.content-wrap .row').length) {
+                        $('.select-all').prop('checked', true);
+                    } else {
+                        $('.select-all').prop('checked', false);
+                    }
+
+                })
+               
+                
+                //全选
+                $('.select-all').click(function(){
+                    if($(this).prop('checked')) {
+                        $('.content-wrap input[type="checkbox"]').prop('checked', true);
+                        $('.content-wrap .row').each((idx, elem) => {
+                            articleIdArr.push(Number($(elem).attr('dataid')));
+                        });
+                        tickedCount = $('.content-wrap .row').length;
+                    } else {
+                        $('.content-wrap input[type="checkbox"]').prop('checked', false);
+                        articleIdArr = [];
+                        tickedCount = 0;
+                    }
+                    console.log(articleIdArr);
+                });
+                
+
+                //真实阅读量上三角形->递增
+                $('.real-number .top-triangle').click(function(){
+                    renderArticle({
+                        page: currentPage,
+                        size,
+                        order: 'read'
+                    });
+                });
+                //真是阅读量下三角形->递减
+                $('.real-number .bt-triangle').click(function(){
+                    // mark
+                    renderArticle({
+                        page: currentPage,
+                        size,
+                    }, function(rows) {
+                        rows.sort((a,b) => {
+                            return b.read - a.read;
+                        })
+                        return rows;
+                    });
+                });
+                //修改后阅读量上三角形->递增
+                $('.after-number .top-triangle').click(function(){
+                    renderArticle({
+                        page: currentPage,
+                        size,
+                        order: 'read_add'
+                    });
+                });
+                //修改后阅读量下三角形->递减
+                $('.after-number .bt-triangle').click(function(){
+                    renderArticle({
+                        page: currentPage,
+                        size,
+                    }, function(rows){
+                        rows.sort((a,b) => {
+                            return b.read_add - a.read_add;
+                        })
+                        return rows;
+                    });
+                });
+
+                //批量删除
+                $('.delete-btn').click(function(){
+                    if(!tickedCount) {
+                        alert('请选择要删除的序号');
+                        return;
+                    }
+                    if(confirm('确定要删除吗')) {
+                        var deletePromise = server.ajaxReturn({
+                            type: "post",
+                            url:  "/article/delete",
+                            headers: {
+                                "X-Token": getUserInfo().token   
+                            },
+                            data: {
+                                articleId: articleIdArr
+                            }
+                        });
+
+                        deletePromise.then(function(res){
+                            //批量删除的业务逻辑
+                            renderArticle({
+                                            page: currentPage, 
+                                            size: 10
+                                          });
+                        }).catch(function(err){
+                            console.log(err);
+                        })
+                    }
+                })
+            }
+            
+
+
+            var init = function() {
+                backToLoginPage(); //如果当前不是登录状态，就返回到登录页面
+                removeIndexData(); //如果sessionStorage有首页文章配置的缓存，就清除
+                removeBannerData(); //如果sessionStorage里有banner配置页的缓存，就清除
+                logout(); //退出登录
+                renderArticle(); //渲染列表
+                filterForm(); 
+                bindEvent();
+                pagination();
+            }
+            init();
+        });
+    
+    </script>
+</body>
+</html>
