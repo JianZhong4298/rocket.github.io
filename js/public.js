@@ -95,7 +95,7 @@ var getValueFromSelect = function(dom) {
 
 //获取服务器地址
 var getBaseUrl = function() {
-    return 'http://rocket.dev.yes-z.com'; 
+    return 'https://rocket.dev.yes-z.com'; 
 }
 
 //如果当前是登录状态，阻止返回登录页面
